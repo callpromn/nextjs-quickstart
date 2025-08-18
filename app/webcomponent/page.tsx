@@ -10,7 +10,7 @@ import {
   Numpad,
   NumberField,
   NumberDeleteButton,
-} from "@callpro/rtc-kit-react";
+} from "@callpromn/rtc-kit-react";
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, Sun, Moon } from "lucide-react";
