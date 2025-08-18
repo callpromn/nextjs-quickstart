@@ -12,8 +12,8 @@
     "next": "15.4.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "@callpro/rtc-sdk": "0.0.3",
-    "@callpro/rtc-kit-react": "0.0.4",
+    "@callpromn/rtc-sdk": "0.0.3",
+    "@callpromn/rtc-kit-react": "0.0.2",
     "lucide-react": "^0.539.0"
   },
   "devDependencies": {
