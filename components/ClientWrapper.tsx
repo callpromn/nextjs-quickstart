@@ -1,6 +1,6 @@
 "use client";
 
-import { ClientProvider } from "@callpro/rtc-kit-react";
+import { ClientProvider } from "@callpromn/rtc-kit-react";
 
 export default function ClientWrapper({
   children,
