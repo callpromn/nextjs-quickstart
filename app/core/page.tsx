@@ -20,19 +20,6 @@ import { useEffect, useRef, useState } from "react";
 
 export default function CorePage() {
   const callClient = CallClient();
-  const phoneNumber =
-    process.env.NEXT_PUBLIC_PHONE_NUMBER || "YOUR_COMPANY_PHONE";
-
-  const config = {
-    socketUrl: process.env.NEXT_PUBLIC_SOCKET_URL!,
-    socketToken: process.env.NEXT_PUBLIC_SOCKET_TOKEN!,
-    socketConnectionOptions: {
-      transports: ["websocket"],
-    },
-    phoneNumber: phoneNumber,
-    outboundRoom: process.env.NEXT_PUBLIC_OUTBOUND_ROOM!,
-    inboundRoom: process.env.NEXT_PUBLIC_INBOUND_ROOM!,
-  };
 
   const [isIncomingCall, setIsIncomingCall] = useState(false);
   const [isOutboundCall, setIsOutboundCall] = useState(false);
@@ -43,6 +30,7 @@ export default function CorePage() {
   const [inboundUserData, setInboundUserData] = useState<InboundUserData>(null);
   const [isMicOn, setIsMicOn] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [configError, setConfigError] = useState<string | null>(null);
   const callClientInstance = useRef<CallClientInstance | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -52,6 +40,21 @@ export default function CorePage() {
 
   const createCallClient = async () => {
     try {
+      const res = await fetch("/api/rtc-config");
+      if (!res.ok) throw new Error("Failed to load config");
+      const serverConfig = await res.json();
+
+      const config = {
+        socketUrl: serverConfig.socketUrl,
+        socketToken: serverConfig.socketToken,
+        socketConnectionOptions: {
+          transports: ["websocket"],
+        },
+        phoneNumber: serverConfig.phoneNumber,
+        outboundRoom: serverConfig.outboundRoom,
+        inboundRoom: serverConfig.inboundRoom,
+      };
+
       callClientInstance.current = await callClient.createClient(config);
 
       callClientInstance.current.on("call_init", async (data: string) => {
@@ -96,6 +99,7 @@ export default function CorePage() {
       console.log("✅ Call client connected and ready");
     } catch (error) {
       console.error("❌ Failed to create call client:", error);
+      setConfigError("Failed to initialize. Please try again.");
     }
   };
 
@@ -215,6 +219,14 @@ export default function CorePage() {
   const handleBackspace = () => {
     setToPhoneNumber(toPhoneNumber.slice(0, -1));
   };
+
+  if (configError) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center text-red-500">
+        {configError}
+      </div>
+    );
+  }
 
   return (
     <div
