@@ -14,7 +14,7 @@ import {
   CallClient,
   CallClientInstance,
   InboundUserData,
-} from "@callpromn/rtc-sdk";
+} from "@callpromn/rtc-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
