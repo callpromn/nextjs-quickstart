@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@callpromn/rtc-react": "file:../rtc-react",
+    "@callpromn/rtc-react": "^0.0.1",
     "lucide-react": "^0.539.0",
     "next": "^15.5.14",
     "react": "19.1.0",
