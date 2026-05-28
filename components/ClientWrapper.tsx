@@ -1,7 +1,6 @@
 "use client";
 
-import { RTCProvider } from "@callpromn/rtc-react";
-import "@callpromn/rtc-react/styles.css";
+import { ClientProvider } from "@callpromn/rtc-kit-react";
 import { useEffect, useState } from "react";
 
 interface RtcConfig {
@@ -47,17 +46,19 @@ export default function ClientWrapper({
   }
 
   return (
-    <RTCProvider
+    <ClientProvider
       config={{
         socketUrl: config.socketUrl,
         socketToken: config.socketToken,
+        socketConnectionOptions: {
+          transports: ["websocket"],
+        },
         phoneNumber: config.phoneNumber,
         outboundRoom: config.outboundRoom,
         inboundRoom: config.inboundRoom,
       }}
-      theme="dark"
     >
       {children}
-    </RTCProvider>
+    </ClientProvider>
   );
 }
