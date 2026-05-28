@@ -220,6 +220,31 @@ export default function CorePage() {
     setToPhoneNumber(toPhoneNumber.slice(0, -1));
   };
 
+  useEffect(() => {
+    if (isIncomingCall || isOutboundCall || isCallActive) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key >= "0" && e.key <= "9") {
+        handleNumberClick(e.key);
+      } else if (e.key === "Backspace") {
+        handleBackspace();
+      } else if (e.key === "Enter") {
+        if (isConnected && toPhoneNumber.length > 0) {
+          handleMakeCall();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [
+    isIncomingCall,
+    isOutboundCall,
+    isCallActive,
+    isConnected,
+    toPhoneNumber,
+  ]);
+
   if (configError) {
     return (
       <div className="w-full h-screen flex items-center justify-center text-red-500">
