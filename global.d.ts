@@ -8,6 +8,7 @@ type RtcCustomElements = {
     "to-phone-number"?: string;
     disabled?: boolean;
     theme?: "light" | "dark";
+    keyboard?: string;
   };
   "accept-button": React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLElement>,
@@ -15,6 +16,7 @@ type RtcCustomElements = {
   > & {
     disabled?: boolean;
     theme?: "light" | "dark";
+    keyboard?: string;
   };
   "decline-button": React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLElement>,
@@ -22,6 +24,7 @@ type RtcCustomElements = {
   > & {
     disabled?: boolean;
     theme?: "light" | "dark";
+    keyboard?: string;
   };
   "endcall-button": React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLElement>,
@@ -29,6 +32,7 @@ type RtcCustomElements = {
   > & {
     disabled?: boolean;
     theme?: "light" | "dark";
+    keyboard?: string;
   };
   "mic-button": React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLElement>,
@@ -37,6 +41,7 @@ type RtcCustomElements = {
     disabled?: boolean;
     "mic-on"?: string;
     theme?: "light" | "dark";
+    keyboard?: string;
   };
   "rtc-numpad": React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLElement>,
@@ -45,6 +50,7 @@ type RtcCustomElements = {
     "phone-number"?: string;
     "max-length"?: string;
     theme?: "light" | "dark";
+    keyboard?: string;
   };
   "rtc-number-field": React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLElement>,
@@ -52,6 +58,7 @@ type RtcCustomElements = {
   > & {
     "phone-number"?: string;
     theme?: "light" | "dark";
+    placeholder?: string;
   };
   "rtc-number-delete-button": React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLElement>,
@@ -60,6 +67,7 @@ type RtcCustomElements = {
     "phone-number"?: string;
     visible?: string;
     theme?: "light" | "dark";
+    keyboard?: string;
   };
 };
 
