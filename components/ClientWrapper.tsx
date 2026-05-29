@@ -31,7 +31,7 @@ export default function ClientWrapper({
 
   if (error) {
     return (
-      <div className="w-full h-screen flex items-center justify-center text-red-500">
+      <div className="w-full h-full min-h-[220px] flex items-center justify-center text-red-500">
         {error}
       </div>
     );
@@ -39,7 +39,7 @@ export default function ClientWrapper({
 
   if (!config) {
     return (
-      <div className="w-full h-screen flex items-center justify-center text-gray-400">
+      <div className="w-full h-full min-h-[220px] flex items-center justify-center text-gray-400">
         Connecting...
       </div>
     );
