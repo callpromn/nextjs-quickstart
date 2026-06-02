@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@callpromn/rtc-kit": "^0.1.0",
-    "@callpromn/rtc-kit-react": "^0.1.0",
-    "@callpromn/rtc-sdk": "^0.0.4",
+    "@callpromn/rtc-kit-react": "^0.1.1",
+    "@callpromn/rtc-sdk": "^0.1.0",
     "lucide-react": "^0.539.0",
     "next": "^15.5.14",
     "react": "19.1.0",
