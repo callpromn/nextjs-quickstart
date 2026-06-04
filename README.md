@@ -9,11 +9,11 @@ CallPro-ийн RTC багцуудыг Next.js (App Router) дээр нэвтрү
 
 ## Ашигласан багцууд
 
-| Багц | Үүрэг |
-|---|---|
-| [`@callpromn/rtc-sdk`](https://www.npmjs.com/package/@callpromn/rtc-sdk) | Дуудлагын цөм SDK: signaling (Socket.IO) ба WebRTC media |
-| [`@callpromn/rtc-kit`](https://www.npmjs.com/package/@callpromn/rtc-kit) | Framework-аас хамааралгүй Web Components UI element-үүд |
-| [`@callpromn/rtc-kit-react`](https://www.npmjs.com/package/@callpromn/rtc-kit-react) | React wrapper component, `ClientProvider` ба hook-ууд |
+| Багц                                                                                 | Үүрэг                                                    |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| [`@callpromn/rtc-sdk`](https://www.npmjs.com/package/@callpromn/rtc-sdk)             | Дуудлагын цөм SDK: signaling (Socket.IO) ба WebRTC media |
+| [`@callpromn/rtc-kit`](https://www.npmjs.com/package/@callpromn/rtc-kit)             | Framework-аас хамааралгүй Web Components UI element-үүд  |
+| [`@callpromn/rtc-kit-react`](https://www.npmjs.com/package/@callpromn/rtc-kit-react) | React wrapper component, `ClientProvider` ба hook-ууд    |
 
 ## Шаардлага
 
@@ -45,16 +45,16 @@ npm run dev      # http://localhost:3000
 
 ## Бүтэц
 
-| Зам | Тайлбар |
-|---|---|
-| `/` | Хоёр хувилбарыг зэрэгцүүлсэн дэлгэц. Аль нэгийг сонгоход зөвхөн тэр тал signaling-тэй холбогдоно (нэг socket холболт) |
-| `/core` | Core — бие даасан хуудас |
-| `/webcomponent` | Component — бие даасан хуудас |
-| `/api/rtc-config` | Тохиргоог runtime үед client рүү дамжуулдаг server route |
+| Зам               | Тайлбар                                                                                                               |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `/`               | Хоёр хувилбарыг зэрэгцүүлсэн дэлгэц. Аль нэгийг сонгоход зөвхөн тэр тал signaling-тэй холбогдоно (нэг socket холболт) |
+| `/core`           | Core — бие даасан хуудас                                                                                              |
+| `/webcomponent`   | Component — бие даасан хуудас                                                                                         |
+| `/api/rtc-config` | Тохиргоог runtime үед client рүү дамжуулдаг server route                                                              |
 
 ## Тохиргоо
 
-Энэ төсөл орчны хувьсагчдаа **зориуд `NEXT_PUBLIC_` угтваргүй** үлдээдэг. `NEXT_PUBLIC_` хувьсагч build үед статик JS bundle дотор шигдэн ордог тул `SOCKET_TOKEN` мэт нууцыг ил гаргана. Тиймээс нууц утгуудыг зөвхөн server талд хадгалж, runtime үед server route-аар дамжуулна:
+Энэ төсөл орчны хувьсагчдаа **зориуд `NEXT_PUBLIC_` угтваргүй** үлдээдэг. `NEXT_PUBLIC_` хувьсагч build үед статик JS bundle дотор ордог тул `SOCKET_TOKEN` мэт нууцыг ил гаргана. Тиймээс нууц утгуудыг зөвхөн server талд хадгалж, runtime үед server route-аар дамжуулна:
 
 ```
 .env.local (server) → GET /api/rtc-config (Cache-Control: no-store) → client
@@ -74,7 +74,11 @@ npm run dev      # http://localhost:3000
 Тохиргоог `/api/rtc-config`-аас татаж `createClient`-д дамжуулна:
 
 ```typescript
-import { CallClient, CallClientInstance, InboundUserData } from "@callpromn/rtc-sdk";
+import {
+  CallClient,
+  CallClientInstance,
+  InboundUserData,
+} from "@callpromn/rtc-sdk";
 
 const callClient = CallClient();
 const instanceRef = useRef<CallClientInstance | null>(null);
@@ -97,7 +101,7 @@ const instance = await callClient.createClient({
 - **Event-үүд** (`instance.on(event, handler)`): `call_init` (`"incoming"`/`"outbound"`), `ringing`, `answered`, `hangup`, `busy`, `bye`. `CoreDialer` нь үндсэн 5-г (`call_init`, `answered`, `hangup`, `busy`, `bye`) боловсруулдаг.
 - **Функцууд**: `createCall(to)`, `acceptCall()`, `declineCall()`, `endCall()`, `toggleMic()`, `isConnected()`, `getInboundUserData()`, `disconnect()`.
 - **Цэвэрлэгээ**: `disconnect()` дуудсаны дараа instance дахин ашиглагдахгүй. Unmount эсвэл React StrictMode-ийн давхар mount үед заавал дуудна (`CoreDialer.tsx`-ийн `useEffect` cleanup-г үз).
-- **UI**: `@callpromn/rtc-kit`-ийн custom element-үүд — `call-button`, `accept-button`, `decline-button`, `endcall-button`, `mic-button`, `rtc-numpad`, `rtc-number-field`, `rtc-number-delete-button`. Багцыг import хийхэд element-үүд global орчинд бүртгэгддэг (side effect) тул зөвхөн client талд динамикаар ачаална (`components/useRtcKitReady.ts`). Attribute-уудын дэлгэрэнгүйг rtc-kit README-ээс үз.
+- **UI**: `@callpromn/rtc-kit`-ийн custom element-үүд — `call-button`, `accept-button`, `decline-button`, `endcall-button`, `mic-button`, `rtc-numpad`, `rtc-number-field`, `rtc-number-delete-button`. Багцыг import хийхэд element-үүд global орчинд бүртгэгддэг (side effect) тул зөвхөн client талд динамикаар ачаална (`components/useRtcKitReady.ts`). Attribute-уудын дэлгэрэнгүйг rtc-kit README-ээс үзээрэй.
 
 ---
 
@@ -132,19 +136,19 @@ useKeyboardDialer({ maxLength: 8 }); // компьютерийн гараар д
 
 ## Харьцуулалт
 
-| Шалгуур | Core (`rtc-sdk`) | Components (`rtc-kit-react`) |
-|---|---|---|
-| Event ба төлөвийн удирдлага | Өөрөө бичнэ | `ClientProvider` автоматаар |
-| UI | Web component эсвэл өөрийн UI | Бэлэн React component |
-| Уян хатан байдал | Бүрэн хяналт | Стандарт хэрэглээнд хангалттай |
-| Кодын хэмжээ | Их | Бага |
-| Тохирох хэрэглээ | Custom UX, framework-гүй орчин | React төсөлд хурдан нэвтрүүлэлт |
+| Шалгуур                     | Core (`rtc-sdk`)               | Components (`rtc-kit-react`)    |
+| --------------------------- | ------------------------------ | ------------------------------- |
+| Event ба төлөвийн удирдлага | Өөрөө бичнэ                    | `ClientProvider` автоматаар     |
+| UI                          | Web component эсвэл өөрийн UI  | Бэлэн React component           |
+| Уян хатан байдал            | Бүрэн хяналт                   | Стандарт хэрэглээнд хангалттай  |
+| Кодын хэмжээ                | Их                             | Бага                            |
+| Тохирох хэрэглээ            | Custom UX, framework-гүй орчин | React төсөлд хурдан нэвтрүүлэлт |
 
 ## Түгээмэл асуудлууд
 
-| Асуудал | Шалгах зүйл |
-|---|---|
-| Холболт үүсэхгүй (🔴) | `.env.local` бөглөгдсөн эсэх; `/api/rtc-config` хариу өгч буй эсэх (DevTools → Network) |
-| `useClientContext` алдаа өгөх | Component `ClientProvider`-ийн дотор байгаа эсэх |
-| Web component харагдахгүй | `@callpromn/rtc-kit` client талд import хийгдсэн эсэх (`useRtcKitReady`) |
-| Микрофон ажиллахгүй | Browser-ийн mic permission; `https://` эсвэл `localhost` шаардлагатай |
+| Асуудал                       | Шалгах зүйл                                                                             |
+| ----------------------------- | --------------------------------------------------------------------------------------- |
+| Холболт үүсэхгүй (🔴)         | `.env.local` бөглөгдсөн эсэх; `/api/rtc-config` хариу өгч буй эсэх (DevTools → Network) |
+| `useClientContext` алдаа өгөх | Component `ClientProvider`-ийн дотор байгаа эсэх                                        |
+| Web component харагдахгүй     | `@callpromn/rtc-kit` client талд import хийгдсэн эсэх (`useRtcKitReady`)                |
+| Микрофон ажиллахгүй           | Browser-ийн mic permission; `https://` эсвэл `localhost` шаардлагатай                   |
