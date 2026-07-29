@@ -70,9 +70,6 @@ function InnerDialer({ theme }: { theme: "light" | "dark" }) {
 
   useKeyboardDialer({ maxLength: 8 });
 
-  // The duration is derived from a start timestamp rather than incremented, so
-  // it stays accurate if the interval is throttled (e.g. backgrounded tab). The
-  // reset lives in the cleanup, which is what leaving the active state runs.
   useEffect(() => {
     if (!isCallActive) return;
 
