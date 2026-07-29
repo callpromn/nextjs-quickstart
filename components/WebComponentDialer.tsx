@@ -70,23 +70,23 @@ function InnerDialer({ theme }: { theme: "light" | "dark" }) {
 
   useKeyboardDialer({ maxLength: 8 });
 
+  // The duration is derived from a start timestamp rather than incremented, so
+  // it stays accurate if the interval is throttled (e.g. backgrounded tab). The
+  // reset lives in the cleanup, which is what leaving the active state runs.
   useEffect(() => {
-    if (isCallActive) {
-      timerRef.current = setInterval(() => {
-        setCallDuration((prev) => prev + 1);
-      }, 1000);
-    } else {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-      setCallDuration(0);
-    }
+    if (!isCallActive) return;
+
+    const startedAt = Date.now();
+    timerRef.current = setInterval(() => {
+      setCallDuration(Math.floor((Date.now() - startedAt) / 1000));
+    }, 1000);
+
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
         timerRef.current = null;
       }
+      setCallDuration(0);
     };
   }, [isCallActive]);
 
