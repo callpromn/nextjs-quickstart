@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 interface RtcConfig {
   socketUrl: string;
-  socketToken: string;
   phoneNumber: string;
   outboundRoom: string;
   inboundRoom: string;
@@ -49,7 +48,7 @@ export default function ClientWrapper({
     <ClientProvider
       config={{
         socketUrl: config.socketUrl,
-        socketToken: config.socketToken,
+        tokenEndpoint: "/api/rtc-config",
         socketConnectionOptions: {
           transports: ["websocket"],
         },
